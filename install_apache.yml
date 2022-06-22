@@ -4,6 +4,17 @@
   become: true
   tasks:
 
-  - name: install apache2 package
+  - name: update repository index
+    yum:
+      update_cache: yes
+
+  - name: install httpd package
     yum:
       name: httpd
+      state: latest
+
+
+  - name: install httpd manual  
+    yum:
+      name: httpd-manual
+      state: latest
