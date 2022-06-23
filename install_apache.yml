@@ -7,14 +7,49 @@
   - name: update repository index
     yum:
       update_cache: yes
+    when: ansible_distribution_version == "Amazon"
 
-  - name: install httpd package
+  - name: install apache package
     yum:
       name: httpd
       state: latest
+    when: ansible_distribution_version == "Amazon"
 
 
-  - name: install httpd manual  
+  - name: install apache manual  
     yum:
       name: httpd-manual
       state: latest
+    when: ansible_distribution_version == "Amazon"
+
+  - name: add php support for apache
+    yum:
+      name: php
+      state: latest
+    when: ansible_distribution_version == "Amazon"
+
+  - name: update repository index
+    apt:
+      update_cache: yes
+    when: ansible_distribution_version == "Ubuntu"
+
+        
+  - name: install Apache package
+    apt:
+      name: apache2
+      state: latest
+    when: ansible_distribution_version == "Ubuntu"
+
+
+  - name: install httpd manual
+    apt:
+      name: httpd-manual
+      state: latest
+    when: ansible_distribution_version == "Ubuntu"
+
+  - name: add php support for apache
+    apt:
+      name: libapache2-mod-php
+      state: latest
+    when: ansible_distribution_version == "Ubuntu"
+      
